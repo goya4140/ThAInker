@@ -20,6 +20,9 @@
     <header class="topbar"><a class="mobile-brand" href="#overview">ThAInker</a><div class="breadcrumb">研究工作台 <span>/</span> <strong id="breadcrumb">全流程概览</strong></div><div class="top-actions"><a href="#human">人工介入地图</a><a href="https://github.com/goya4140/ThAInker" target="_blank" rel="noopener">GitHub ↗</a><span class="pill demo">STATIC DEMO</span></div></header>
     <div class="static-notice"><span>◉</span><p><strong>交互是真的，研究内容是模拟的。</strong>本页仅在浏览器内推进演示状态，不连接模型、服务器或 GPU；下载文件为预先生成并标注的模拟示例。</p></div>
     <main>
+      <button id="current-checkpoint" class="checkpoint-banner" data-checkpoint hidden></button>
+      <button id="next-step" class="checkpoint-banner" data-action="advance" hidden>演示下一步 →</button>
+      <p id="sample-context" class="sample-context" hidden></p>
       <section id="overview-screen" class="screen">
         <div class="hero"><div><p class="eyebrow">FROM A QUESTION TO A PAPER</p><h1>让一个想法，<br>走完整段研究旅程。</h1><p class="hero-copy">调研、实验、写作、表格与主图，在一个工作台衔接。<br><em>自动推进过程，把关键决定留给研究者。</em></p><div class="button-row"><button class="primary" data-action="start">体验完整流程 <span>→</span></button><a class="secondary" href="#search">先看看五个模块 ↗</a></div></div><div class="hero-visual" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="orbit-center">Th<span>AI</span></div><span class="orbit-word ow1">QUESTION</span><span class="orbit-word ow2">EVIDENCE</span><span class="orbit-word ow3">PAPER</span><span class="orbit-human">◎ YOU, AT THE HELM</span></div></div>
         <div class="section-intro"><div><p class="eyebrow">ONE PROJECT. FIVE CONNECTED STAGES.</p><h2>看得见进度，接得住每一次交接。</h2></div><span class="caption">点击任一阶段，浏览完整前端示例</span></div>

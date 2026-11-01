@@ -75,3 +75,21 @@ test("invalid selection is rejected and transitions do not mutate the previous s
   assert.throws(() => transition(state, "select", { id: "not-a-candidate" }));
   assert.equal(state.candidate, null);
 });
+
+test("human checkpoint destinations survive pause and are absent after decisions", async () => {
+  const { checkpointFor } = await import("../flow.mjs");
+  assert.equal(checkpointFor(createDemo()), null);
+  let state = transition(transition(createDemo(), "start"), "advance");
+  assert.deepEqual(checkpointFor(state), {id:"search", tab:"ideas"});
+  assert.deepEqual(checkpointFor(transition(state, "pause")), {id:"search", tab:"ideas"});
+  state = transition(state, "select", {id:"scale"});
+  assert.equal(checkpointFor(state), null);
+  state = transition(transition(state, "advance"), "advance");
+  assert.deepEqual(checkpointFor(state), {id:"design", tab:"approval"});
+  assert.deepEqual(checkpointFor(transition(state, "reject")), {id:"design", tab:"approval"});
+  assert.equal(checkpointFor(transition(state, "abandon")), null);
+  state = transition(createDemo(), "start", {manual:false,revision:false,failure:false});
+  for(let i=0;i<5;i++) state = transition(state,"advance");
+  assert.deepEqual(checkpointFor(state), {id:"figure",tab:"references"});
+  assert.equal(checkpointFor(transition(state,"references",{slots:[true,true,true]})), null);
+});

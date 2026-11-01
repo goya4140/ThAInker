@@ -7,7 +7,7 @@ export const STAGES = [
   { id: "figure", name: "Auto Figure", title: "主图与交付", verb: "把方法变成可编辑的图", human: "必需 · 参考图确认" },
 ];
 
-export const LABELS = { idle: "等待开始", running: "演示推进中", paused: "演示已暂停", waiting_selection: "等待人工选题", waiting_revision: "等待方法审批", waiting_references: "等待参考图确认", blocked: "体验故障恢复", completed: "演示已完成", abandoned: "本次演示已结束" };
+export const LABELS = { idle: "等待开始", running: "逐步演示中", paused: "演示已暂停", waiting_selection: "等待人工选题", waiting_revision: "等待方法审批", waiting_references: "等待参考图确认", blocked: "体验故障恢复", completed: "演示已完成", abandoned: "本次演示已结束" };
 
 export function createDemo() {
   return { stage: 0, status: "idle", done: [], candidate: null, approved: false,
@@ -86,4 +86,10 @@ export function transition(previous, action, payload = {}) {
     }
   } else throw new Error("未知演示动作。");
   return state;
+}
+
+// One canonical destination for every blocking human checkpoint, including paused gates.
+export function checkpointFor(state) {
+  const status = state.status === "paused" ? state.resumeStatus : state.status;
+  return ({ waiting_selection: {id:"search", tab:"ideas"}, waiting_revision: {id:"design", tab:"approval"}, waiting_references: {id:"figure", tab:"references"} })[status] || null;
 }
