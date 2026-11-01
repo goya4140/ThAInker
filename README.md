@@ -1,253 +1,192 @@
-# AutoResearch
+<div align="center">
 
-AutoResearch 将 **Auto Search、Auto Design、Auto Writing、Auto Table、Auto Figure** 整合到一个网页入口，支持从调研自动交接到实验和论文，同时保留各模块的独立任务。首页可管理全流程、恢复失败步骤并重启研究服务，**Research Journey（科研航线）** 可查看各阶段进展、分支和关联产物。
+![ThAInker：让一个想法，走完整段研究旅程](site/media/hero.svg)
 
-## 📖 [点击进入 Wiki 图文使用手册 →](https://github.com/yzbcs/Autoresearch/wiki)
+### Research, connected. Researchers, in control.
 
-第一次使用？从这里开始：**页面操作指引 · 五模块使用步骤 · 科研航线 · 常见问题 · PDF 图文版下载**。
+**从研究方向到论文交付的五阶段工作台。自动推进过程，把关键决定留给研究者。**
 
-## 五模块工作台
+[**▶ 体验在线 Demo**](https://goya4140.github.io/ThAInker/) · [**◎ 人工介入地图**](https://goya4140.github.io/ThAInker/#human) · [**↧ 示例交付**](https://goya4140.github.io/ThAInker/#delivery) · [本地运行](#本地运行)
 
-在仓库根目录运行（Python 3.11+）：
+`5 个研究模块`　`可选接入 / 条件审批 / 必需确认`　`MIT 开源`
+
+</div>
+
+---
+
+## 不止展示一张图，亲手走一遍流程
+
+[![ThAInker 在线演示概览](site/media/00-overview.png)](https://goya4140.github.io/ThAInker/)
+
+进入 [**GitHub Pages 在线 Demo**](https://goya4140.github.io/ThAInker/)，无需安装、账号或 GPU：
+
+1. **浏览五个模块**：看论文卡、候选 Idea、实验方案、六章节写作、表格与可编辑主图。
+2. **做一次研究者的决定**：选择 Idea，批准或拒绝指定方法提案，确认三张参考图。
+3. **体验中途接管**：暂停、继续，或处理一次模拟写作中断，观察流程如何接续。
+4. **带走一份示例**：下载预生成的论文 PDF、LaTeX 源码、PPTX 主图与逐种子模拟数据。
+
+> [!NOTE]
+> 在线 Demo 是**纯静态前端交互**。研究内容、评分、评审与数据均为模拟；浏览器不会调用模型、服务器、GPU 或编译器。下载文件由本地离线演示预先生成，并带有 DEMO / SYNTHETIC 标记。
+
+## 一条研究旅程，五次有据可查的交接
+
+```mermaid
+flowchart LR
+    S["01 · Auto Search<br/>论文 → Weakness → Idea → 评审"] --> C{"选题<br/>自动 / 人工"}
+    C --> D["02 · Auto Design<br/>设计 → 必要时 R0 → 执行 → 诊断 → 审计"]
+    D -->|需要方法修改| A["◎ 人工审批<br/>指定 Revision ID"]
+    A --> D
+    D -->|完成状态与审计、证据检查通过| W["03 · Auto Writing<br/>调研 → 六章节 → 引用 → LaTeX / PDF"]
+    W --> T["04 · Auto Table<br/>整理表格 → 编译 → 全页复核"]
+    T --> R["◎ 作者确认<br/>三张参考图"]
+    R --> F["05 · Auto Figure<br/>主图 → 插图 → 编译 → 全页复核"]
+    F --> O["论文 PDF · LaTeX ZIP<br/>可编辑 PPTX · 方法图 · 过程产物"]
+    classDef stage fill:#edf3e7,stroke:#a8c196,color:#284c34;
+    classDef human fill:#fbf0da,stroke:#c7a367,color:#88682f;
+    class S,D,W,T,F,O stage;
+    class C,A,R human;
+```
+
+每个模块都保留独立入口。你可以从研究方向开始，也可以接续已有调研、实验、写作或表格任务。Research Journey 用保存的记录展示当前阶段、分支、事件与关联产物。[流程与恢复设计 →](docs/frontend_workflow.md)
+
+## ◎ 人在什么地方接入？
+
+**不是每一步都要确认。不同边界，对应不同的人工决定。**
+
+| 接入位置 | 人可以做什么 | 触发方式 | 自动推进的边界 |
+| --- | --- | --- | --- |
+| **开始研究** | 给出方向、科学意图、可选 Benchmark、材料与资源约束；选择起点 | 开始前输入 | 保留用户提供的科学约束 |
+| **Search · 选题与核验** | 查看证据、选择 Idea，标记通过 / 废弃并可撤销核验 | **可选接入** | 自动模式仅取 `promising`、未被人工废弃的首选 |
+| **Design · 方法修改** | 阅读完整提案；批准匹配的 Revision ID、拒绝或结束当前 Idea | **条件触发，必须审批** | 普通“继续”和恢复说明不能替代方法批准 |
+| **Writing · 材料与模板** | 补充实验说明和支持资料，替换模板，逐步生成或自动继续 | **可选接入** | 输入变化使受影响产物失效；编译可单独重试 |
+| **Table · 排版与反馈** | 选择输入和配置、提出要求；复核失败后带反馈进入下一轮 | **可选接入** | 保留原数值、方法名、来源及 `N/A` / `INCOMPLETE` |
+| **Figure · 参考图** | 逐张选择默认图或上传三张图片，再明确确认 | **必须确认** | 未确认不启动真实绘图；参考只影响视觉表达 |
+| **跨阶段控制** | 查看日志、暂停、恢复、从已有任务接续 | **按需接入** | 保留完成步骤；服务重启后由用户显式继续 |
+
+> **拒绝不会被自动流程覆盖。** 停止实验控制器也不等于远端训练已经停止；恢复前仍需核对在途执行。
+
+[**打开可交互的人工介入地图 ↗**](https://goya4140.github.io/ThAInker/#human)
+
+<details>
+<summary><strong>◎ 展开查看人工介入地图界面</strong></summary>
+
+[![人工介入地图：可选接入、条件审批、必需确认](site/media/06-human.png)](https://goya4140.github.io/ThAInker/#human)
+
+</details>
+
+## 五个模块，逐屏展开
+
+以下为在线静态演示的界面，使用预置模拟内容；每一屏都标出对应的人工入口。点击标题展开截图，或直接进入在线模块。
+
+<details open>
+<summary><strong>01 · Auto Search｜从方向到值得验证的问题</strong></summary>
+
+**输入**：研究方向或具体 Weakness。**产物**：论文与证据、成因、Contribution、方法、Benchmark 和评审。
+
+**◎ 人工入口**：核验来源、选择候选、通过 / 废弃；也可自动选题。
+
+[![调研与选题演示](site/media/01-search.png)](https://goya4140.github.io/ThAInker/#search)
+
+[进入在线调研模块 ↗](https://goya4140.github.io/ThAInker/#search) · [模块说明](auto_search/README.md)
+
+</details>
+
+<details>
+<summary><strong>02 · Auto Design｜把贡献变成可检验的实验</strong></summary>
+
+**输入**：选定 Idea 与科学约束。**产物**：设计、必要时 R0、命令与执行记录、逐 seed 结果、诊断和审计。
+
+**◎ 人工入口**：仅设计 / 完整执行、暂停恢复；发生方法修改时审批指定提案。
+
+[![实验设计与人工审批演示](site/media/02-design.png)](https://goya4140.github.io/ThAInker/#design)
+
+[进入在线实验模块 ↗](https://goya4140.github.io/ThAInker/#design) · [模块说明](auto_design/README.md)
+
+</details>
+
+<details>
+<summary><strong>03 · Auto Writing｜沿证据链写作，沿依赖推进</strong></summary>
+
+**输入**：通过检查的实验资料、补充材料与可选模板。**产物**：六章节、文献与引用、LaTeX 工程和 PDF。
+
+**◎ 人工入口**：补充或替换输入、选择模板、逐步启动或自动完成、失败处继续。
+
+[![六章节写作演示](site/media/03-writing.png)](https://goya4140.github.io/ThAInker/#writing)
+
+[进入在线写作模块 ↗](https://goya4140.github.io/ThAInker/#writing) · [模块说明](auto_writing/README.md)
+
+</details>
+
+<details>
+<summary><strong>04 · Auto Table｜让比较清楚，保持数值不变</strong></summary>
+
+**输入**：完整论文 ZIP 或结构化实验结果。**产物**：表格、来源记录、LaTeX / HTML / PDF 与复核。
+
+**◎ 人工入口**：输入与配置、排版要求、复核反馈和同任务修订。
+
+[![实验表格与模拟结果演示](site/media/04-table.png)](https://goya4140.github.io/ThAInker/#table)
+
+[进入在线表格模块 ↗](https://goya4140.github.io/ThAInker/#table) · [模块说明](auto_table/README.md)
+
+</details>
+
+<details>
+<summary><strong>05 · Auto Figure｜确认参考，把方法变成可编辑的图</strong></summary>
+
+**输入**：表格复核后的论文副本与三张参考图。**产物**：原生 PPTX、独立主图 PDF / PNG、含图论文与源码。
+
+**◎ 人工入口**：默认 / 自有参考图选择和确认、修改要求、暂停恢复与复核重试。
+
+[![参考图确认与主图演示](site/media/05-figure.png)](https://goya4140.github.io/ThAInker/#figure)
+
+[进入在线绘图模块 ↗](https://goya4140.github.io/ThAInker/#figure) · [模块说明](auto_figure/README.md)
+
+</details>
+
+## 三种体验方式
+
+| | GitHub Pages 在线 Demo | 本地离线 Demo | 完整研究工作台 |
+| --- | --- | --- | --- |
+| 适合 | 产品导览、宣传、前端交互 | 端到端软件演示与验收 | 真实研究任务 |
+| 需要安装 | 无 | Python、演示依赖和 LaTeX | Python、Codex CLI；实验与绘图按模块配置 |
+| 模型 / GPU | 不调用 | 预置模型响应，CPU 模拟实验 | 按任务、模型和资源真实执行 |
+| 页面状态 | 浏览器内模拟 | 原任务管理器与调度器 | 原任务管理器与调度器 |
+| 编译与下载 | 预生成模拟样例 | 本机真实编译、生成与下载 | 按实际执行结果交付 |
+| 研究结论 | 不产生 | 不产生 | 必须以真实证据、诊断与审计为准 |
+
+## 本地运行
+
+### 离线演示：不接 GPU，也能验证软件交接
 
 ```bash
-python3 -m workbench --port 8760
+git clone https://github.com/goya4140/ThAInker.git
+cd ThAInker
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -e '.[demo]'
+.venv/bin/python -m workbench.demo --port 8769
 ```
 
-打开 [AutoResearch 工作台](http://127.0.0.1:8760/)。调用模型需要已安装并登录的 Codex CLI；生成 PDF 还需要 LaTeX 编译器。工作台自身只用 Python 标准库，不需要 Node、Skills 或额外前端构建。
+打开 <http://127.0.0.1:8769/demo.html>。需要本机已有 LaTeX 编译器；模拟数据独立保存在 `assets/output/demo/`。可体验人工选题、故障恢复和参考图确认。细节见[离线演示说明](docs/DEMO.zh-CN.md)。
 
-| 模块 | 本地入口 | 功能 |
-| --- | --- | --- |
-| Auto Search | [/auto-search/](http://127.0.0.1:8760/auto-search/) | 论文调研、Idea 生成、独立评审、人工核验 |
-| Auto Design | [/auto-design/](http://127.0.0.1:8760/auto-design/) | 实验设计、R0、执行、暂停恢复、结果诊断与审计 |
-| Auto Writing | [/auto-writing/](http://127.0.0.1:8760/auto-writing/) | 文献调研、六章节写作、参考文献、LaTeX 与 PDF |
-| Auto Table | [/auto-table/](http://127.0.0.1:8760/auto-table/) | 论文表格整理、实验数据制表、PDF 编译与独立复核 |
-| Auto Figure | [/auto-figure/](http://127.0.0.1:8760/auto-figure/) | 方法主图 SVG、局部插入论文、最终 PDF 与复核 |
-
-首页点击“新建全流程”可从研究方向开始，或接续已有调研、实验、写作任务。选题、方法审批、暂停、错误日志、局部重试和模板更换均可在网页处理。设计与恢复边界见 [全流程说明](docs/frontend_workflow.md)。
-
-Auto Table 支持上传论文 ZIP、上传结构化实验结果，或接续 Auto Writing 已生成的论文。保持原始数值、方法名与来源，提供模板规划、失败恢复、表格源码和 PDF 下载。完整说明见 [Auto Table](auto_table/README.md)。新建全流程自动执行 Auto Search → Auto Design → Auto Writing → Auto Table → Auto Figure，最后以方法主图插入、论文编译与复核通过作为交付完成条件；五个模块也可独立启动。历史流程保留原完成语义。AutoFigure 复用已通过复核的 AutoTable 论文副本，保留表格和正文，交付 SVG、LaTeX ZIP 与含图 PDF。绘图依赖与配置见 [Auto Figure](auto_figure/README.md)。
-
-任务数据默认保存在 `assets/output/workbench/`。启动或切换页面不会自动启动研究任务。完整启动参数、功能范围和验收记录见 [工作台说明](workbench/README.md) 与 [开发记录](docs/README.md)。
-
-## Research Journey · 科研航线
-
-启动工作台后，点击顶部「科研航线」，或打开 [Research Journey](http://127.0.0.1:8760/journey.html)。它使用现有全流程记录，不需要额外启动服务或执行前端构建。
-
-- **真实进度**：查看论文数、候选 Idea、实验观测单元和设计调用次数；缺失记录显示 `—`。
-- **交互航线**：查看五阶段及已记录的候选、R0 和方法修改分支；支持拖动、缩放、缩略图定位、全屏和 SVG 导出。
-- **节点详情**：查看当前状态与关联产物，进入原模块继续操作。
-- **事件时间线**：浏览已记录事件，每约 4 秒同步；历史事件不代表历史状态回放。
-- **中英文界面**：右上角切换中文 / English，并记住选择；任务名称、研究内容和原始日志保留原文。
-
-关闭「实时更新」只暂停页面同步；「暂停流程」沿用工作台暂停功能，恢复与审批在「管理流程」或原模块处理。观测记录不代表实验或审计通过。详细操作见 [航线使用指南](docs/RESEARCH_JOURNEY.zh-CN.md) 或 [Wiki 补充页](https://github.com/yzbcs/Autoresearch/wiki/Research-Journey)。
-
-## 原有 AutoResearch CLI
-
-仓库原有的证据检索 CLI 继续保留：
-
-```text
-research topic -> papers -> paper cards -> field map -> gap evidence report
-```
-
-该 CLI 生成支持组会讨论和后续实验设计的研究图谱；论文写作使用上面的 Auto Writing 模块。
-
-## Auto Design
-
-`auto_design/` 提供实验设计与执行工作台：原生 HTML/CSS/JavaScript 前端、Python 服务端、Codex CLI 分阶段编排。无需安装 AutoDesign Skills 或 Node 依赖。
+### 完整工作台：连接自己的研究环境
 
 ```bash
-python3 -m auto_design serve --port 8767
+.venv/bin/python -m workbench --port 8760
 ```
 
-需要 Python 3.11+ 和已登录的 Codex CLI。详见 [Auto Design 模块说明](auto_design/README.md)。原有 AutoResearch 搜索命令继续按下文使用。
+打开 <http://127.0.0.1:8760/>。真实调用需要已登录的 Codex CLI，具体实验依赖与资源由任务决定；绘图需要单独配置 FigureCrafter 环境。启动服务本身不会自动启动研究任务。[工作台说明](workbench/README.md) · [绘图环境](auto_figure/README.md)
 
-## Quick Start
+## 继续了解
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -e .
+| 入口 | 内容 |
+| --- | --- |
+| [静态站点维护与部署](docs/GITHUB_PAGES.zh-CN.md) | 如何本地预览、更新公开样例与发布 GitHub Pages |
+| [本地演示说明](docs/DEMO.zh-CN.md) | 模拟边界、运行方式、隔离目录和验收 |
+| [全流程与恢复](docs/frontend_workflow.md) | 交接门槛、暂停、恢复、审批与版本失效 |
+| [Research Journey](docs/RESEARCH_JOURNEY.zh-CN.md) | 科研航线、分支、事件和真实指标 |
+| [图文使用手册](docs/USER_MANUAL.zh-CN.md) | 完整工作台操作指引 |
+| [原 AutoResearch 功能与 CLI](docs/AUTORESEARCH_GUIDE.md) | 证据检索、PaperCard、MOC、Gap 与原命令 |
 
-autoresearch search "medical VLM temporal lesion change analysis" --limit 20 --full-text-limit 6
-```
+---
 
-AutoResearch can run with an explicit domain profile:
-
-```bash
-autoresearch search "medical VLM temporal lesion change analysis" --profile medical-vlm
-autoresearch search "GUI agent benchmark real-world workflow" --profile gui-agent
-```
-
-To generate a profile from a topic before running search:
-
-```bash
-autoresearch profile "GUI agent benchmark real-world workflow"
-```
-
-To regenerate the UI from an existing run:
-
-```bash
-autoresearch dashboard outputs/medical-vlm-temporal-lesion-change-analysis
-```
-
-To regenerate the Chinese synthesis and UI from an existing run:
-
-```bash
-autoresearch synthesize outputs/gui-agent-benchmark-real-world-workflow
-```
-
-To serve generated dashboards through a small read-only web server:
-
-```bash
-AUTORESEARCH_PORT=8766 autoresearch-server
-```
-
-Open `http://127.0.0.1:8766/`. Deployment notes for ECS / Nginx are in
-`docs/DEPLOY.md`.
-
-To let Codex act as the manual LLM reviewer for MOC, Gap, and opportunities:
-
-```bash
-autoresearch codex-packet outputs/gui-agent-benchmark-real-world-workflow
-# Ask Codex to read codex_review_packet.json and write codex_review_result.json.
-autoresearch codex-apply \
-  outputs/gui-agent-benchmark-real-world-workflow \
-  outputs/gui-agent-benchmark-real-world-workflow/codex_review_result.json
-```
-
-The detailed workflow is documented in `docs/CODEX_REVIEW_WORKFLOW.md`. Codex Review is the current
-main research-judgment path: automated code collects evidence, and Codex reviews/refines MOC, Gap,
-and research opportunities.
-
-The next search-quality plan is documented in `docs/PROFILE_AWARE_SOURCE_RANKER_PLAN.md`. It keeps
-steps small: first label core/adjacent/noise evidence, then connect the labels to ranking and UI.
-
-Optional Semantic Scholar API key:
-
-```bash
-export SEMANTIC_SCHOLAR_API_KEY="..."
-```
-
-Optional Unpaywall email for open-access PDF enrichment:
-
-```bash
-export UNPAYWALL_EMAIL="you@example.com"
-```
-
-Experimental API-based paper-card extraction:
-
-```bash
-export AUTORESEARCH_LLM_API_KEY="..."
-export AUTORESEARCH_LLM_MODEL="..."
-export AUTORESEARCH_LLM_BASE_URL="https://api.openai.com/v1"
-
-autoresearch search "medical VLM temporal lesion change analysis" --llm-card-limit 5
-```
-
-This is not the current main path. The main path is Codex Review through `codex-packet` and
-`codex-apply`.
-
-Outputs are written to:
-
-```text
-outputs/<topic-slug>/
-  dashboard.html
-  domain_profile.json
-  raw/
-  source_coverage.md
-  search_result.json
-  synthesis.json
-  analysis_report.md
-  codex_review_packet.md
-  codex_review_packet.json
-  codex_review_result.template.json
-  paper_cards.json
-  paper_insights.json
-  influences.json
-  open_access.json
-  llm_extractions.json
-  field_map.json
-  topic_moc.json
-  topic_moc.md
-  comparison_matrix.json
-  comparison_matrix.md
-  gaps.json
-  gap_evidence_chains.md
-  research_opportunities.json
-  research_opportunities.md
-  report.md
-  weakness_report.md
-```
-
-## Current MVP
-
-- Query planning from a high-level research direction.
-- Domain Profile v1: `auto`, `medical-vlm`, `gui-agent`, `llm-agent`, or a custom JSON profile can
-  define core concepts, query terms, capability dimensions, benchmark keywords, metric keywords, and
-  gap lenses before search starts.
-- Multi-source paper collection from arXiv, OpenAlex, PubMed, Europe PMC, CrossRef, and OpenReview.
-- Failure-tolerant source execution with warnings.
-- DOI / PMID / arXiv / OpenAlex / fuzzy-title deduplication.
-- Explainable ranking using lexical relevance, recency, citation count, source reliability, and
-  research-signal keywords.
-- Optional PDF/HTML full-text fetching for top-ranked papers.
-- Section splitting for abstract, methods, experiments, results, limitations, and related sections.
-- Source stability guard: local arXiv cache, shorter arXiv timeout, and per-run source skipping after
-  repeated consecutive failures.
-- Semantic Scholar enrichment for citation counts, influential citation counts, references, fields
-  of study, venue, and open-access PDF links.
-- Unpaywall enrichment for DOI-based open-access landing pages and PDF links.
-- Paper card extraction from title, abstract, metadata, and section-aware full text when available.
-- Profile-grounded paper card coverage tags, including capability-specific tags such as
-  `capability:real-world-long-horizon-workflow` or
-  `capability:lesion-level-temporal-change-reasoning`.
-- Paper Card v2 fields with problem, method family, core assumption, evidence type, missing
-  capability, relation-to-topic, gap hint, per-field evidence snippets, extraction status, and
-  coverage tags.
-- Profile-aware non-medical paper-card heuristics so GUI/LLM agent runs do not reuse medical-only
-  task, gap-hint, method-family, dataset, metric, or localization templates.
-- Optional LLM-backed Paper Card refinement through an OpenAI-compatible chat-completions endpoint.
-  It is disabled by default and only updates fields that cite existing evidence snippet IDs.
-- Paper Insight Cards that capture problem, method core, evidence, assumption, limitation,
-  cross-paper relation, inspiration, and experimentable gap.
-- Topic MOC v2 generation for core concepts, paper groups, problem spaces, shared assumptions,
-  method families, datasets/benchmarks, covered capabilities, missing capabilities, open questions,
-  and possible experiments.
-- Cross-paper comparison matrix across paper groups: problem space, method family, temporal input,
-  lesion localization, change evaluation, location consistency, benchmark/metric coverage, and gap
-  hints.
-- Lightweight field mapping by task, method, dataset, metric, and model type.
-- Evidence-grounded gap finding with source URLs, snippets, section labels, support/counter counts,
-  and confidence score reasons.
-- Profile-grounded Gap Finder that can generate coverage, benchmark, and metric gaps for the
-  selected domain instead of only using the medical VLM demo rules.
-- Gap Evidence Chain v2 paper-level judgments: each paper is marked as support, counter, or unclear
-  for each gap, with missing evidence and influence signals.
-- Gap evidence chain Markdown export plus evidence-backed research opportunity generation.
-- Chinese synthesis layer that lets Codex stand in for the later LLM step by summarizing Domain
-  Profile, source quality, MOC takeaways, Gap evidence chains, limitations, and next actions into
-  `analysis_report.md` and `synthesis.json`.
-- Codex-in-the-loop review mode: `codex-packet` exports evidence for manual Codex review, and
-  `codex-apply` imports Codex's structured JSON judgment back into MOC, Gap evidence chains,
-  research opportunities, synthesis, reports, and the dashboard.
-- Dashboard clearly marks whether current research judgments are `Rule-generated` or
-  `Codex-reviewed`.
-- Weakness report optimized for research discussion: how each weakness emerges, evidence chain,
-  counter evidence, why still open, experimentable idea, and verification plan.
-- Static local dashboard UI for source health, paper cards, MOC problem spaces, gap evidence chains,
-  research opportunities, and synthesis.
-- Dashboard UI labels and rule-generated research signals are localized in Chinese while preserving
-  original paper titles and evidence snippets.
-- Dashboard top actions switch between Chinese in-page tabs instead of jumping to Markdown exports.
-- Dashboard shows the active Domain Profile, core concepts, capability dimensions, benchmark/metric
-  keywords, and gap lenses.
-- Paper cards, MOC problem spaces, Gap evidence chains, and research opportunities are expandable
-  detail panels, with an LLM extraction summary shown at the top of the page.
-- Source coverage report and readiness gate for validating search breadth before interpreting
-  preliminary weaknesses.
-- Markdown and JSON artifact export.
-
-## Design Principle
-
-Every gap should be traceable to evidence. If evidence is weak, AutoResearch should say so.
+**来源与许可**：ThAInker 基于 [yzbcs/Autoresearch](https://github.com/yzbcs/Autoresearch) 继续完善，保留其研究模块与原始记录，按 [MIT License](LICENSE) 开源。Auto Table、FigureCrafter 等集成来源及许可见各模块说明。公开演示文件均为明确标注的模拟样例，不含本地运行日志或登录信息。

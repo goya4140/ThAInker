@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="530" viewBox="0 0 1440 530">
+<rect width="1440" height="530" rx="24" fill="#edf2e6"/>
+<g fill="none" stroke="#cbdac0"><ellipse cx="1195" cy="183" rx="173" ry="87" transform="rotate(-25 1195 183)"/><ellipse cx="1195" cy="183" rx="173" ry="87" transform="rotate(25 1195 183)"/><ellipse cx="1195" cy="183" rx="194" ry="58"/></g>
+<rect x="1147" y="136" width="96" height="96" rx="22" fill="#dce8d0" stroke="#c2d5b2"/><text x="1195" y="178" text-anchor="middle" fill="#31543a" font-family="Georgia,serif" font-size="35">Th</text><text x="1195" y="215" text-anchor="middle" fill="#829a6d" font-family="Georgia,serif" font-size="35">AI</text>
+<text x="66" y="65" fill="#7c966a" font-family="Arial,sans-serif" font-size="13" letter-spacing="4">RESEARCH, CONNECTED.</text>
+<text x="64" y="159" fill="#294c35" font-family="Georgia,serif" font-size="84">ThAInker</text>
+<text x="68" y="219" fill="#405e39" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="30">让一个想法，走完整段研究旅程。</text>
+<text x="68" y="263" fill="#8a9b7d" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="18">自动推进过程 · 人在关键节点 · 每一步留下产物</text>
+<g font-family="Arial,PingFang SC,Microsoft YaHei,sans-serif">
+<path d="M180 370H1260" stroke="#b7cda7" stroke-width="2"/>
+<g fill="#fff" stroke="#d2dfc8"><rect x="65" y="325" width="238" height="106" rx="12"/><rect x="333" y="325" width="238" height="106" rx="12"/><rect x="601" y="325" width="238" height="106" rx="12"/><rect x="869" y="325" width="238" height="106" rx="12"/><rect x="1137" y="325" width="238" height="106" rx="12"/></g>
+<g fill="#31543a" font-size="21"><text x="88" y="366">01  Auto Search</text><text x="356" y="366">02  Auto Design</text><text x="624" y="366">03  Auto Writing</text><text x="892" y="366">04  Auto Table</text><text x="1160" y="366">05  Auto Figure</text></g>
+<g fill="#93a287" font-size="16"><text x="88" y="401">调研与选题</text><text x="356" y="401">实验与审计</text><text x="624" y="401">论文与引用</text><text x="892" y="401">表格与复核</text><text x="1160" y="401">主图与交付</text></g>
+<g fill="#a1854e" font-size="14"><text x="88" y="467">◎ 可选：人工选题</text><text x="356" y="467">◎ 条件：方法审批</text><text x="624" y="467">◎ 可选：材料 / 模板</text><text x="892" y="467">◎ 可选：排版反馈</text><text x="1160" y="467">◎ 必需：参考图确认</text></g>
+</g></svg>

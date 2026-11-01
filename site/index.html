@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ThAInker：从研究方向到论文交付的五阶段工作台。在线体验调研、实验、写作、表格、主图，以及关键人工介入节点。">
+  <meta name="theme-color" content="#234535"><meta property="og:title" content="ThAInker · 让一个想法，走完整段研究旅程。">
+  <meta property="og:description" content="五阶段交互演示 · 人在关键节点 · 全程保留证据与产物。">
+  <title>ThAInker · 研究由你掌舵</title>
+  <link rel="icon" type="image/svg+xml" href="media/favicon.svg">
+  <link rel="stylesheet" href="style.css"><script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark">Th<br>AI</span><span>ThAInker<small>RESEARCH, CONNECTED.</small></span></a>
+    <p class="nav-label">EXPLORE THE WORKBENCH</p>
+    <nav id="navigation" aria-label="演示导航"></nav>
+    <div class="sidebar-note"><span class="live-dot"></span> GitHub Pages · 静态交互演示<p>无需安装 · 无需登录 · 无需 GPU</p><a href="https://github.com/goya4140/ThAInker">查看开源项目 ↗</a></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><a class="mobile-brand" href="#overview">ThAInker</a><div class="breadcrumb">研究工作台 <span>/</span> <strong id="breadcrumb">全流程概览</strong></div><div class="top-actions"><a href="#human">人工介入地图</a><a href="https://github.com/goya4140/ThAInker" target="_blank" rel="noopener">GitHub ↗</a><span class="pill demo">STATIC DEMO</span></div></header>
+    <div class="static-notice"><span>◉</span><p><strong>交互是真的，研究内容是模拟的。</strong>本页仅在浏览器内推进演示状态，不连接模型、服务器或 GPU；下载文件为预先生成并标注的模拟示例。</p></div>
+    <main>
+      <section id="overview-screen" class="screen">
+        <div class="hero"><div><p class="eyebrow">FROM A QUESTION TO A PAPER</p><h1>让一个想法，<br>走完整段研究旅程。</h1><p class="hero-copy">调研、实验、写作、表格与主图，在一个工作台衔接。<br><em>自动推进过程，把关键决定留给研究者。</em></p><div class="button-row"><button class="primary" data-action="start">体验完整流程 <span>→</span></button><a class="secondary" href="#search">先看看五个模块 ↗</a></div></div><div class="hero-visual" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="orbit-center">Th<span>AI</span></div><span class="orbit-word ow1">QUESTION</span><span class="orbit-word ow2">EVIDENCE</span><span class="orbit-word ow3">PAPER</span><span class="orbit-human">◎ YOU, AT THE HELM</span></div></div>
+        <div class="section-intro"><div><p class="eyebrow">ONE PROJECT. FIVE CONNECTED STAGES.</p><h2>看得见进度，接得住每一次交接。</h2></div><span class="caption">点击任一阶段，浏览完整前端示例</span></div>
+        <div id="stage-cards" class="stage-cards"></div>
+        <div class="overview-bottom"><section class="editorial-panel"><p class="eyebrow">HUMAN IN THE LOOP</p><h2>不是每一步都要点确认。<br>关键边界，需要你的决定。</h2><p>自动选题与人工核验可以并存；方法修改要匹配具体提案审批；主图生成前，作者确认三张参考图。</p><a href="#human" class="text-link">查看全部人工介入节点 →</a></section><section class="artifact-teaser"><p class="eyebrow">ARTIFACTS, NOT JUST ANSWERS</p><h2>每一步都有产物。</h2><div class="file-chips"><span>Idea.md</span><span>Results.json</span><span>Paper.pdf</span><span>Figure.pptx</span></div><p>浏览模拟数据与预生成论文，理解模块间的输入、输出和追溯关系。</p><a class="text-link" href="#delivery">打开示例交付 →</a></section></div>
+      </section>
+      <section id="module-screen" class="screen" hidden></section>
+      <section id="human-screen" class="screen" hidden></section>
+      <section id="delivery-screen" class="screen" hidden></section>
+      <section id="guide" class="guide" aria-label="流程导览控制台">
+        <div class="guide-header"><div><p class="eyebrow">INTERACTIVE WALKTHROUGH</p><h2>把流程跑一遍。</h2></div><span id="guide-status" class="pill">等待开始</span></div>
+        <div id="guide-setup" class="guide-setup"><label><input id="manual-choice" type="checkbox" checked>人工选择 Idea <small>可选接入</small></label><label><input id="revision-choice" type="checkbox" checked>体验方法修改审批 <small>条件触发</small></label><label><input id="failure-choice" type="checkbox" checked>体验一次故障恢复</label><button class="primary" data-action="start">开始交互导览 →</button></div>
+        <ol id="guide-progress" class="guide-progress" aria-label="五阶段演示进度"></ol>
+        <div id="guide-message" role="status" aria-live="polite"></div>
+        <div id="guide-controls" class="button-row"></div>
+        <details class="events"><summary>浏览本次模拟事件 <span id="event-count">0</span></summary><ol id="events"></ol></details>
+      </section>
+      <p id="toast" class="toast" role="status" hidden></p>
+      <footer><a href="https://github.com/goya4140/ThAInker">ThAInker · Research, connected.</a><span>基于 <a href="https://github.com/yzbcs/Autoresearch">AutoResearch</a> · <a href="https://github.com/goya4140/ThAInker/blob/main/LICENSE">MIT</a> · 所有演示数值均为模拟</span></footer>
+    </main>
+  </div>
+</body>
+</html>

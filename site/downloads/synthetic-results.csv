@@ -1,0 +1,7 @@
+variant,seed,dice,simulation
+baseline,1,0.78,true
+baseline,2,0.79,true
+baseline,3,0.8,true
+ours,1,0.84,true
+ours,2,0.85,true
+ours,3,0.86,true
