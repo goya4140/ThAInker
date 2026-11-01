@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThAInker · 研究流程演示</title><link rel="icon" href="data:,">
+  <link rel="stylesheet" href="demo.css"><script src="demo.js" defer></script>
+</head>
+<body>
+  <aside class="rail">
+    <a href="/demo.html" class="brand"><span class="brand-symbol">Th<span>AI</span></span><strong>ThAInker<small>RESEARCH, CONNECTED.</small></strong></a>
+    <div class="rail-label">产品演示</div>
+    <a class="rail-link active" href="/demo.html"><span>◈</span> 全流程体验</a>
+    <a class="rail-link" href="/journey.html"><span>⌁</span> Research Journey <span class="out">↗</span></a>
+    <a class="rail-link" href="/"><span>⊞</span> 原始工作台 <span class="out">↗</span></a>
+    <div class="rail-divider"></div><div class="rail-label">五个阶段 · 一个研究项目</div>
+    <nav id="stage-nav" aria-label="演示阶段"></nav>
+    <div class="rail-bottom"><span class="status-dot"></span><span id="connection">连接演示服务中</span><p>本地运行 · 无需 GPU</p></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div><span class="muted">ThAInker</span><span class="slash">/</span>研究流程演示</div><span class="demo-chip"><i></i> DEMO 模式</span></header>
+    <main>
+      <section class="hero">
+        <div><p class="eyebrow">FROM A QUESTION TO A PAPER</p><h1>让一个想法，<br>走完整段研究旅程。</h1><p class="hero-copy">从文献与选题，到实验、写作、表格和方法主图。<br>在一个可交互的项目中，看见每一步如何衔接。</p></div>
+        <div class="hero-orbit" aria-hidden="true"><div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div><div class="orbit-core">Th<span>AI</span></div><span class="orbit-tag tag-one">IDEA</span><span class="orbit-tag tag-two">EVIDENCE</span><span class="orbit-tag tag-three">PAPER</span></div>
+      </section>
+      <div class="disclosure"><span class="disclosure-mark">D</span><div><strong>这是一个可重复运行的模拟演示</strong><p>文献、模型评审与实验数据均为预置内容；未运行真实 GPU 训练。任务调度、文件交接、数值汇总、论文编译及下载真实执行。</p></div><span class="offline-tag">OFFLINE READY</span></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <section class="project-panel">
+        <div class="panel-heading"><div><p class="eyebrow">YOUR DEMO PROJECT</p><h2>小目标识别中的局部证据保留</h2><p class="panel-subtitle">一个假设性研究案例，串起五个阶段的输入与产物。</p></div><span id="flow-status" class="state-chip">准备开始</span></div>
+        <div id="setup" class="setup"><div class="setup-options"><label>选题方式<select id="selection" aria-label="选题方式"><option value="auto">自动选择演示首选方案</option><option value="manual">由我选择候选 Idea</option></select></label><label class="check-label"><input id="fail-once" type="checkbox"><span>体验一次故障恢复<small>在写作阶段模拟中断，点击继续接续原任务</small></span></label></div><button class="primary start-button" data-action="start">开始全流程演示 <span>↗</span></button></div>
+        <div id="run-controls" class="run-controls" hidden><p id="flow-message"></p><div class="button-row"><button class="secondary" id="pause" data-action="pause">暂停流程</button><button class="primary" id="resume" data-action="resume" hidden>继续当前步骤 →</button><button class="secondary" id="restart" data-action="start" hidden>再演示一次 ↻</button><a href="/journey.html" class="text-link">在科研航线中查看 ↗</a></div></div>
+        <ol id="progress-track" class="progress-track" aria-label="五阶段进度"></ol>
+        <div id="stage-detail" class="stage-detail"></div>
+      </section>
+      <section id="interaction" class="interaction" hidden></section>
+      <section class="evidence-grid">
+        <article class="metric-panel"><div class="section-heading"><div><p class="eyebrow">EXPERIMENT SNAPSHOT</p><h2>实验数据如何成为结果</h2></div><span class="mini-chip">模拟数据</span></div><p class="panel-subtitle">2 个方法 × 3 个种子。均值和样本标准差由原有汇总代码计算。</p><div id="metrics" class="metrics-empty"><span>▥</span><p>实验阶段完成后，模拟数据会出现在这里。</p></div></article>
+        <article class="artifact-panel"><div class="section-heading"><div><p class="eyebrow">RESEARCH ARTIFACTS</p><h2>每一步都有可见产物</h2></div><span class="mini-chip">可下载</span></div><div id="artifacts" class="artifacts-empty"><p>运行后可打开原始模块，查看 Idea、实验记录、论文和主图。</p><div class="placeholder-files"><span>▤ Idea.md</span><span>▦ Results.json</span><span>▧ Paper.pdf</span></div></div></article>
+      </section>
+      <section id="delivery" class="delivery" hidden><div><p class="eyebrow">THE JOURNEY, DELIVERED</p><h2>从一个问题，到一份完整交付。</h2><p>方法主图、论文 PDF、可编辑源码与过程记录，均来自本次演示运行。</p><p class="delivery-note">所有研究内容和数值均为模拟。主图由预置模板生成；复核为预置演示响应。</p><div id="downloads" class="button-row"></div></div><a id="figure-link" target="_blank" rel="noopener"><img id="figure-preview" alt="本次演示生成的局部证据保留方法主图"></a></section>
+      <details id="timeline-panel" class="timeline-panel"><summary>查看真实流程事件 <span id="event-count">0</span></summary><ol id="timeline"></ol></details>
+      <footer><span>ThAInker · Research, connected.</span><span>模拟科研内容 / 真实软件流程</span></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -221,7 +221,7 @@ def test_writing_upload_edit_dependencies_and_delete(app):
     assert "intro_research" in json.dumps(blocked)
     json_request(app, base + "/actions/related_work_plan/run", {}, status=409)
     json_request(app, base + "/publication/build", {}, status=409)
-    json_request(app, base, method="DELETE")
+    json_request(app, base, {"passphrase": "DEL"}, method="DELETE")
     assert json_request(app, "/auto-writing/api/writings")["writings"] == []
 
 
@@ -318,7 +318,7 @@ def test_search_pipeline_review_and_delete_through_http(app, monkeypatch):
     assert json_request(app, run_url + "/ideas")["ideas"][0]["human_review"] == "approved"
     json_request(app, review_url, {"decision": None}, method="PUT")
     assert json_request(app, run_url + "/ideas")["ideas"][0]["human_review"] is None
-    json_request(app, run_url, method="DELETE")
+    json_request(app, run_url, {"passphrase": "DEL"}, method="DELETE")
     assert json_request(app, "/auto-search/api/runs")["runs"] == []
 
 
