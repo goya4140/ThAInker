@@ -1,4 +1,4 @@
-import { STAGES, LABELS, createDemo, transition, checkpointFor } from "./flow.mjs";
+import { STAGES, LABELS, createDemo, transition, checkpointFor } from "./flow.mjs?v=20261101-qa1";
 
 const $ = (selector) => document.querySelector(selector);
 const escape = (value) => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]);
@@ -184,7 +184,6 @@ function act(action, payload = {}) {
     }
     $("#toast").hidden = true;
     render();
-
   } catch (error) {
     notify(error.message);
   }
